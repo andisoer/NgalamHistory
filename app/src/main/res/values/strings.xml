@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">NgalamHistory</string>
+
+    <!-- String ActMain Java -->
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+
+    <!-- nav_menu -->
+    <string name="Allartic">Semua Artikel</string>
+    <string name="Recomended">Rekomendasi</string>
+    <string name="Liked">Disukai</string>
+
+    <!-- nav_menu lainya -->
+    <string name="Lainya">Lainnya</string>
+    <string name="About">About Us</string>
+    <string name="Setting">Pengaturan</string>
+    <string name="LogOut">Sign Out</string>
+
+    <!-- Nama Menu / Kategori -->
+    <string name="SejarahMalang">Sejarah Malang</string>
+    <string name="SenBudMalang">Seni Budaya Malang</string>
+    <string name="MakananMalang">Makanan Malang</string>
+
+    <!-- Other -->
+    <string name="Explore">Jelajahi Lebih Lanjut</string>
+    <string name="DummyText">Lorem Ipsum Sit Dolor Amit</string>
+    <string name="DummyText2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper magna vel ligula faucibus sodales. Mauris eu fermentum sapien. Proin purus sem, viverra pretium urna vitae, ultricies aliquam justo. Maecenas nibh nulla, dapibus ac vulputate eu, aliquet ac ex. Proin in ipsum augue. Praesent egestas dui quis pharetra consequat. Curabitur accumsan accumsan nisl. Quisque non porta risus, in ultricies justo. Nam commodo dolor ut scelerisque fringilla. Fusce eu leo semper, efficitur tellus ut, porttitor nisi. Curabitur dignissim justo quam, at finibus lacus iaculis eget. Curabitur et tortor tortor. Sed convallis libero eu velit interdum, vitae condimentum ligula faucibus. Cras aliquam laoreet nisi, at volutpat tortor molestie a.Pellentesque eget nisi aliquam, eleifend diam non, fermentum nunc. Donec ex mi, venenatis varius scelerisque eu, cursus eget metus. Phasellus lacinia lacus augue. In sagittis diam id erat pellentesque sagittis. Vestibulum aliquam, nunc in consequat auctor, neque arcu euismod quam, ac ornare diam nibh in mauris. Fusce aliquam lorem id malesuada malesuada. Nunc auctor elit vel elit viverra, ac tincidunt nisi aliquam.
+Sed rutrum nulla magna, ac sodales odio sagittis ut. Morbi finibus nisl velit, a maximus magna consequat in. Mauris ut tellus tellus. Proin ultricies at libero eget maximus. Curabitur bibendum mauris metus, vel imperdiet lectus accumsan sed. Vivamus nec efficitur ipsum, et fermentum tellus. Donec aliquam eget quam ac lobortis. Praesent quis diam sagittis, tristique velit a, mattis magna. Nam porta in arcu id dapibus. Nunc tempor condimentum nisl in sollicitudin. Nulla cursus, dui a viverra sagittis, purus massa faucibus lectus, sed fringilla elit metus vitae ipsum. Donec elementum malesuada ipsum non congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec nulla purus, efficitur nec faucibus hendrerit, mollis ut turpis. Mauris vel placerat libero. Cras mattis ligula eget nunc volutpat luctus.</string>
+    <string name="DummyText3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper magna vel ligula faucibus sodales. Mauris eu fermentum sapien. Proin purus sem, viverra pretium urna vitae, ultricies aliquam justo. Maecenas nibh nulla, dapibus ac vulputate eu, aliquet ac ex. Proin in ipsum augue.</string>
+    <string name="shared_view_transition">Transition</string>
+
+</resources>

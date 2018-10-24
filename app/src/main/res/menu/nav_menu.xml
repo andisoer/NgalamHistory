@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+          android:id="@+id/allartic"
+          android:icon="@drawable/ic_action_list"
+          android:title="@string/Allartic"/>
+
+        <item
+          android:id="@+id/recomended"
+          android:icon="@drawable/ic_action_star"
+          android:title="@string/Recomended"/>
+
+        <item
+          android:id="@+id/liked"
+          android:icon="@drawable/ic_action_thumbup"
+          android:title="@string/Liked"/>
+
+    </group>
+
+    <item android:title="@string/Lainya">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:title="@string/About" />
+
+            <item
+                android:id="@+id/setting"
+                android:title="@string/Setting"/>
+
+            <item
+                android:id="@+id/LogOut"
+                android:title="@string/LogOut"/>
+        </menu>
+    </item>
+
+</menu>

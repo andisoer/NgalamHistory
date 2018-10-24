@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "964096987816",
+    "firebase_url": "https://ngalamhistory-38025.firebaseio.com",
+    "project_id": "ngalamhistory-38025",
+    "storage_bucket": "ngalamhistory-38025.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964096987816:android:d5e76e3597658ec7",
+        "android_client_info": {
+          "package_name": "com.soerja.ngalamhistory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964096987816-qmerfstu932hgqt0p2rc0ac7cfo8ksqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soerja.ngalamhistory",
+            "certificate_hash": "96f701e6614b596c9a53321019c1e24b58aecf3e"
+          }
+        },
+        {
+          "client_id": "964096987816-fchssg8ii3lfe6qnj861cqmflrqo5lgn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXqF6nX1L1nzmhjmadAHN5oBxC8zhN3sA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964096987816-fchssg8ii3lfe6qnj861cqmflrqo5lgn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarmanageart"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@android:color/white"
+            android:elevation="4dp"
+            android:fitsSystemWindows="true">
+
+            <TextView
+                android:id="@+id/tbtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage Konten"
+                android:textColor="@android:color/white"
+                style="@style/TextAppearance.AppCompat.Title"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
+
+       <Button
+           android:id="@+id/manageKategori"
+           android:layout_margin="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/colorPrimLight"
+           android:textColor="@color/colorWhite"
+           android:text="MANAGE KATEGORI"
+           android:focusable="true"
+           android:clickable="true" />
+
+        <Button
+            android:id="@+id/manageArtikel"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimLight"
+            android:textColor="@color/colorWhite"
+            android:text="MANAGE ARTIKEL"
+            android:focusable="true"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
