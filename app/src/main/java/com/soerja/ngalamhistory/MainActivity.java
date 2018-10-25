@@ -14,12 +14,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Set;
+import com.soerja.ngalamhistory.article.sejarah.SejarahActivty;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,9 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
+
+
         };
 
-        // Ke Artikel
+        // Ke ArtikelAdapterSejarah
         butHis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

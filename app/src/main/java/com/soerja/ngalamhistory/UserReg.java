@@ -4,7 +4,6 @@ public class UserReg {
 
     public String userName, email, pass, type;
 
-
     public UserReg(String userName, String email, String pass, String type) {
         this.userName = userName;
         this.email = email;

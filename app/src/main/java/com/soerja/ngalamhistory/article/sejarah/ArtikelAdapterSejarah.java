@@ -1,18 +1,12 @@
-package com.soerja.ngalamhistory.manage_artikel;
+package com.soerja.ngalamhistory.article.sejarah;
 
-public class ListArtikelAdmin {
+
+public class ArtikelAdapterSejarah {
 
     public String judul_artikel, judul_gambar, kontent,uploader, kategori;
 
-    public ListArtikelAdmin() {
-    }
+    public ArtikelAdapterSejarah() {
 
-    public ListArtikelAdmin(String judul_artikel, String judul_gambar, String kontent, String uploader, String kategori) {
-        this.judul_artikel = judul_artikel;
-        this.judul_gambar = judul_gambar;
-        this.kontent = kontent;
-        this.uploader = uploader;
-        this.kategori = kategori;
     }
 
     public String getJudul_artikel() {

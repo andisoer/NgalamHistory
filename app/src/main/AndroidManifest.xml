@@ -40,10 +40,10 @@
         <activity android:name=".MakananActivity" >
         </activity>
 
-        <activity android:name=".SejarahActivty" android:parentActivityName=".MainActivity">
+        <activity android:name=".article.sejarah.SejarahActivty" android:parentActivityName=".MainActivity">
         </activity>
 
-        <activity android:name=".article.sejarah.SejarahArtActivity" android:parentActivityName=".SejarahActivty" >
+        <activity android:name=".article.sejarah.SejarahArtActivity" android:parentActivityName=".article.sejarah.SejarahActivty" >
         </activity>
 
         <activity android:name=".article.sejarah.photodesc.PhotoDescActivity" android:parentActivityName=".article.sejarah.SejarahArtActivity">

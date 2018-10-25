@@ -18,7 +18,7 @@ public class RecArtActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         CollapsingToolbarLayout collapstoolhisart = (CollapsingToolbarLayout) findViewById(R.id.coollapshisart);
-        collapstoolhisart.setTitle("Judul Artikel");
+        collapstoolhisart.setTitle("Judul ArtikelAdapterSejarah");
 
         collapstoolhisart.setCollapsedTitleTextColor(ContextCompat.getColor(RecArtActivity.this, R.color.colorWhite));
         collapstoolhisart.setExpandedTitleColor(ContextCompat.getColor(RecArtActivity.this, R.color.colorWhite));

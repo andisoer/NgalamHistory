@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        onAuthSuccess(task.getResult().getUser()); //Memanggil Method onAuthSuccess()
+                                        onAuthSuccess(task.getResult().getUser());
                                     }
                                     else{
                                         Toast.makeText(LoginActivity.this, "User Tidak Ditemukan!", Toast.LENGTH_SHORT).show();

@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +65,7 @@ public class AddArtikel extends AppCompatActivity {
         current_user_uid = firebaseAuth.getCurrentUser().getUid();
         UploadIMGReference = FirebaseStorage.getInstance().getReference();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        artikelRef = FirebaseDatabase.getInstance().getReference().child("Artikel");
+        artikelRef = FirebaseDatabase.getInstance().getReference("ArtikelAdapterSejarah");
 
         kategori = (Spinner)findViewById(R.id.SpinnerkategoriArtikel);
         uploadArtikel = (Button)findViewById(R.id.TambahArtikel);
@@ -112,13 +113,13 @@ public class AddArtikel extends AppCompatActivity {
         Isi = isiArt.getText().toString().trim();
 
         if(imageUri == null){
-            Toast.makeText(AddArtikel.this, "Pilih Gambar Untuk Judul Artikel !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Pilih Gambar Untuk Judul ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Judul)){
-            Toast.makeText(AddArtikel.this, "Isi Judul Artikel !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Isi Judul ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Isi)){
-            Toast.makeText(AddArtikel.this, "Isi Konten Artikel !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Isi Konten ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
         }else{
             showProgressDialog();
             SaveImageToStorage();
@@ -138,21 +139,28 @@ public class AddArtikel extends AppCompatActivity {
 
         postRandomName = saveCurrentDate + saveCurrentTime;
 
-        StorageReference pathFile = UploadIMGReference.child("Judul_Gambar_Artikel").child(imageUri.getLastPathSegment()+postRandomName+".jpeg");
+        final StorageReference pathFile = UploadIMGReference.child("Judul_Gambar_Artikel").child(imageUri.getLastPathSegment()+postRandomName+".jpeg");
 
-        pathFile.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        pathFile.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    throw task.getException();
+                }
+
+                return pathFile.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
-
-                    downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
-                    Toast.makeText(AddArtikel.this, "Gambar Berhasil Di-Upload !", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(AddArtikel.this, "Upload Gambar ArtikelAdapterSejarah Berhasil !", Toast.LENGTH_SHORT).show();
+                    downloadUrl = task.getResult().toString();
                     simpanArtikel();
                 }
                 else{
                     String error = task.getException().getMessage();
-                    Toast.makeText(AddArtikel.this, "Terjadi Error : "+ error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddArtikel.this, "Terjadi Kesalahan + "+error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -167,29 +175,14 @@ public class AddArtikel extends AppCompatActivity {
                     String userName = dataSnapshot.child("userName").getValue().toString();
                     String kategoriArtikel = kategori.getSelectedItem().toString();
 
-                    HashMap postMap = new HashMap();
-                        postMap.put("uid", current_user_uid);
-                        postMap.put("judul_artikel", Judul);
-                        postMap.put("judul_gambar", downloadUrl);
-                        postMap.put("kontent", isiArt);
-                        postMap.put("Uploader", userName);
-                        postMap.put("Kategori", kategoriArtikel);
+                    String uid = artikelRef.push().getKey();
+                    AddArtikelAdapater addArtikelData = new AddArtikelAdapater(Judul, downloadUrl, Isi, userName, kategoriArtikel);
+                    artikelRef.child(uid).setValue(addArtikelData);
 
-                        artikelRef.child(postRandomName+current_user_uid).updateChildren(postMap).addOnCompleteListener(new OnCompleteListener() {
-                            @Override
-                            public void onComplete(@NonNull Task task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(AddArtikel.this, "Upload Artikel Berhasil !", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddArtikel.this, ManageArtikelActivity.class);
-                                    startActivity(intent);
-                                }
-                                else{
-                                    String error = task.getException().getMessage();
-                                    Toast.makeText(AddArtikel.this, "Terjadi Kesalahan + "+error, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                    Toast.makeText(AddArtikel.this, "Upload ArtikelAdapterSejarah "+Judul+" Berhasil", Toast.LENGTH_SHORT).show();
 
+                    Intent intent = new Intent(AddArtikel.this, ManageArtikelActivity.class);
+                    startActivity(intent);
 
                 }
             }

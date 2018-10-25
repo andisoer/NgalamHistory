@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/D:/Apps/x64/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_add_a_photo_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/D:/Apps/x64/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_thumb_up_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,9 +55,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_addpict" />
+                                      <entry key="outputName" value="ic_action_thumbupblack" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="00796b" />
+                                      <entry key="themeColor" value="999999" />
                                     </map>
                                   </option>
                                 </PersistentState>

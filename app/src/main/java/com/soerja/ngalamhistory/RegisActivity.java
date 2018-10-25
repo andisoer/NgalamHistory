@@ -46,8 +46,7 @@ public class RegisActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-
-        // Ketika di klik, tombol registrasi memanggil method cekInputanUser();
+        //tombol registrasi
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,10 +58,10 @@ public class RegisActivity extends AppCompatActivity {
     //Method cekInputanUser()
     private void cekInputanUser(){
 
-        getUserName = userReg.getText().toString(); // get Username dari TextInputEditText userReg
-        getEmail = emailReg.getText().toString();   // get Email dari  TextInputEditText emailReg
-        getPass = passReg.getText().toString(); //get Password dari  TextInputEditText passReg
-        type = "user"; //Ketika Registrasi, user akan otomatis mendapat level "user" (Ketika Ingin Menjadi Admin, Diubah di RealTimeDataBase)
+        getUserName = userReg.getText().toString();
+        getEmail = emailReg.getText().toString();
+        getPass = passReg.getText().toString();
+        type = "user";
 
         if(TextUtils.isEmpty(getUserName)){
             Toast.makeText(this, "Username Harus Diisi !", Toast.LENGTH_SHORT).show();
@@ -80,7 +79,7 @@ public class RegisActivity extends AppCompatActivity {
             else{
 
                 showProgressDialog();
-                createUserAcc(); //Panggil Method createUserAcc()
+                createUserAcc();
             }
         }
     }
@@ -95,17 +94,12 @@ public class RegisActivity extends AppCompatActivity {
     }
 
     private void createUserAcc(){
-        auth.createUserWithEmailAndPassword(getEmail, getPass) //Registrasi / Autentikasi Menggunakan Email dan Pass (Seperti Biasa)
+        auth.createUserWithEmailAndPassword(getEmail, getPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
                             UserReg user = new UserReg(getUserName, getEmail, getPass, type);
-                            // UserReg --> Class bernama UserReg
-
-
-                            //Kodingan dibawah diketik sadja, lek gak ngerti takok :v
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
