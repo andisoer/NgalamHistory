@@ -12,10 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -69,10 +73,35 @@ public class ManageKategori extends AppCompatActivity {
                         referenceKategori
                 ) {
                     @Override
-                    protected void populateViewHolder(ViewHolderKategori viewHolder, ListKategori model, int position) {
+                    protected void populateViewHolder(final ViewHolderKategori viewHolder, final ListKategori model, int position) {
                         viewHolder.setJenis_kategori(model.getJenis_kategori());
                         viewHolder.setGambar_kategori(getApplicationContext(), model.getGambar_kategori());
                         viewHolder.setDeskripsi_kategori(model.getDeskripsi_kategori());
+                        viewHolder.menu.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PopupMenu popupMenu = new PopupMenu(ManageKategori.this, viewHolder.menu);
+                                popupMenu.inflate(R.menu.menu_cardview_manage_kategori);
+                                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+                                        switch (menuItem.getItemId()){
+                                            case R.id.kategori_edit:
+                                                Toast.makeText(ManageKategori.this, "Edit", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            case R.id.kategori_delete:
+                                                Toast.makeText(ManageKategori.this, "Delete", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+                                        return false;
+                                    }
+                                });
+                                popupMenu.show();
+                            }
+                        });
                     }
                 };
 
@@ -81,10 +110,13 @@ public class ManageKategori extends AppCompatActivity {
 
     public static class ViewHolderKategori extends RecyclerView.ViewHolder{
         View mView;
+        TextView menu;
 
         public ViewHolderKategori(View itemView){
             super(itemView);
             mView = itemView;
+
+            menu = (TextView)mView.findViewById(R.id.menu_kategori);
         }
 
         public void setJenis_kategori(String jenis_kategori){

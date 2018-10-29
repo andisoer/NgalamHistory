@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.soerja.ngalamhistory.ComentActivity;
 import com.soerja.ngalamhistory.R;
 import com.squareup.picasso.Picasso;
 
@@ -119,10 +118,8 @@ public class ArtikelActivity extends AppCompatActivity {
                     Toast.makeText(ArtikelActivity.this, "Anda Harus Login Untuk Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
                 }
 
-
             }
         });
-
 
         //Komment
         btnCMNT.setOnClickListener(new View.OnClickListener() {

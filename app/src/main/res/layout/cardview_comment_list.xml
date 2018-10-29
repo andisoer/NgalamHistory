@@ -41,8 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:text="Koment User"
-                android:layout_marginBottom="10dp"/>
+                android:text="Koment User" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,8 +50,25 @@
                 android:gravity="end">
 
                 <TextView
+                    android:id="@+id/Tanggal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Saturday, 20 Oktober 2018"
+                    android:layout_marginRight="2dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackground"
+                    android:padding="0.5dp">
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/timeKomen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
                     android:text="06.00"
                     android:layout_gravity="end"/>
 

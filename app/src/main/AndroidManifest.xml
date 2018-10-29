@@ -40,7 +40,7 @@
         <activity android:name=".article.sejarah.ArtikelListActivity" android:parentActivityName=".MainActivity">
         </activity>
 
-        <activity android:name=".ComentActivity" android:parentActivityName=".article.sejarah.ArtikelActivity">
+        <activity android:name=".article.sejarah.ComentActivity" android:parentActivityName=".article.sejarah.ArtikelActivity">
         </activity>
 
         <activity android:name=".article.sejarah.ArtikelActivity" android:parentActivityName=".article.sejarah.ArtikelListActivity" >

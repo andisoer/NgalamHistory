@@ -154,7 +154,7 @@ public class AddArtikel extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(AddArtikel.this, "Upload Gambar ArtikelAdapterSejarah Berhasil !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddArtikel.this, "Upload Gambar Arikel Berhasil !", Toast.LENGTH_SHORT).show();
                     downloadUrl = task.getResult().toString();
                     simpanArtikel();
                 }

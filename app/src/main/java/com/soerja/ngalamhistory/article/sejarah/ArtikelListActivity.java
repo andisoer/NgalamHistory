@@ -102,8 +102,6 @@ public class ArtikelListActivity extends AppCompatActivity {
 
         }
 
-
-
     }
 
 }

@@ -28,5 +28,6 @@
 Sed rutrum nulla magna, ac sodales odio sagittis ut. Morbi finibus nisl velit, a maximus magna consequat in. Mauris ut tellus tellus. Proin ultricies at libero eget maximus. Curabitur bibendum mauris metus, vel imperdiet lectus accumsan sed. Vivamus nec efficitur ipsum, et fermentum tellus. Donec aliquam eget quam ac lobortis. Praesent quis diam sagittis, tristique velit a, mattis magna. Nam porta in arcu id dapibus. Nunc tempor condimentum nisl in sollicitudin. Nulla cursus, dui a viverra sagittis, purus massa faucibus lectus, sed fringilla elit metus vitae ipsum. Donec elementum malesuada ipsum non congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec nulla purus, efficitur nec faucibus hendrerit, mollis ut turpis. Mauris vel placerat libero. Cras mattis ligula eget nunc volutpat luctus.</string>
     <string name="DummyText3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper magna vel ligula faucibus sodales. Mauris eu fermentum sapien. Proin purus sem, viverra pretium urna vitae, ultricies aliquam justo. Maecenas nibh nulla, dapibus ac vulputate eu, aliquet ac ex. Proin in ipsum augue.</string>
     <string name="shared_view_transition">Transition</string>
+    <string name="menu">&#8942;</string>
 
 </resources>
