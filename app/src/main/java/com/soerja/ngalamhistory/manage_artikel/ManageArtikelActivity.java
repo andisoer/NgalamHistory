@@ -42,7 +42,7 @@ public class ManageArtikelActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton)findViewById(R.id.fab_add_artikel);
 
-        artikelAdminReference = FirebaseDatabase.getInstance().getReference().child("ArtikelAdapterSejarah");
+        artikelAdminReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

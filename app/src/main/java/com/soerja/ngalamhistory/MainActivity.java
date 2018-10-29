@@ -1,5 +1,6 @@
 package com.soerja.ngalamhistory;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,23 +10,35 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.soerja.ngalamhistory.article.sejarah.SejarahActivty;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.soerja.ngalamhistory.article.sejarah.ArtikelListActivity;
+import com.soerja.ngalamhistory.manage_kategori.ListKategori;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout DL;
     private ActionBarDrawerToggle swipe;
     private NavigationView NV;
-    private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private DatabaseReference referenceKategori;
+    private RecyclerView  recyclerView;
+    private String kategori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Deklarasi Button
-        Button butHis = (Button)findViewById(R.id.sejarah);
+        referenceKategori = FirebaseDatabase.getInstance().getReference().child("Kategori");
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerviewMainActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         DL = (DrawerLayout)findViewById(R.id.activity_main);
         swipe = new ActionBarDrawerToggle(MainActivity.this, DL,R.string.Open, R.string.Close);
@@ -84,28 +99,77 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //Firebase
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null){
+                if(user == null){
 
                 }
             }
-
-
         };
 
-        // Ke ArtikelAdapterSejarah
-        butHis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inthis = new Intent(MainActivity.this, SejarahActivty.class);
-                startActivity(inthis);
-            }
-        });
+        displayKategoriMain();
+    }
 
+    private void displayKategoriMain() {
+        FirebaseRecyclerAdapter<ListKategori, ViewHolderKategoriMain> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<ListKategori, ViewHolderKategoriMain>(
+                        ListKategori.class,
+                        R.layout.cardview_activity_main,
+                        ViewHolderKategoriMain.class,
+                        referenceKategori
+
+                ) {
+                    @Override
+                    protected void populateViewHolder(ViewHolderKategoriMain viewHolder, ListKategori model, int position) {
+                        viewHolder.setJenis_kategori(model.getJenis_kategori());
+                        viewHolder.setGambar_kategori(getApplicationContext(), model.getGambar_kategori());
+                        viewHolder.setDeskripsi_kategori(model.getDeskripsi_kategori());
+
+                        kategori = model.getJenis_kategori();
+
+                        viewHolder.button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(MainActivity.this, ArtikelListActivity.class);
+                                intent.putExtra("kategori", kategori);
+                                startActivity(intent);
+                            }
+                        });
+
+                    }
+                };
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class ViewHolderKategoriMain extends RecyclerView.ViewHolder{
+        View mView;
+        Button button;
+
+        public ViewHolderKategoriMain(View itemView){
+            super(itemView);
+            mView = itemView;
+
+            button = (Button)mView.findViewById(R.id.button);
+
+        }
+
+        public void setJenis_kategori(String jenis_kategori){
+            TextView judul_kategori = (TextView)mView.findViewById(R.id.judul_kategori_main);
+            judul_kategori.setText(jenis_kategori);
+        }
+
+        public void setGambar_kategori(Context ctx, String gambar_kategori){
+            ImageView gambar_kategori_home = (ImageView)mView.findViewById(R.id.kategoriGambarMainActivity);
+            Picasso.with(ctx).load(gambar_kategori).into(gambar_kategori_home);
+        }
+
+        public void setDeskripsi_kategori(String deskripsi_kategori){
+            TextView deskripsi_kategori_main = (TextView)mView.findViewById(R.id.deskripsi_singkat_kategori_main);
+            deskripsi_kategori_main.setText(deskripsi_kategori);
+        }
     }
 
     private void showDialog(){

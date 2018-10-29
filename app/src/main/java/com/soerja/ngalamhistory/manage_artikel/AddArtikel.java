@@ -65,7 +65,7 @@ public class AddArtikel extends AppCompatActivity {
         current_user_uid = firebaseAuth.getCurrentUser().getUid();
         UploadIMGReference = FirebaseStorage.getInstance().getReference();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        artikelRef = FirebaseDatabase.getInstance().getReference("ArtikelAdapterSejarah");
+        artikelRef = FirebaseDatabase.getInstance().getReference("Artikel");
 
         kategori = (Spinner)findViewById(R.id.SpinnerkategoriArtikel);
         uploadArtikel = (Button)findViewById(R.id.TambahArtikel);
@@ -113,7 +113,7 @@ public class AddArtikel extends AppCompatActivity {
         Isi = isiArt.getText().toString().trim();
 
         if(imageUri == null){
-            Toast.makeText(AddArtikel.this, "Pilih Gambar Untuk Judul ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Pilih Gambar Untuk Judul Artikel !", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Judul)){
             Toast.makeText(AddArtikel.this, "Isi Judul ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
@@ -179,8 +179,7 @@ public class AddArtikel extends AppCompatActivity {
                     AddArtikelAdapater addArtikelData = new AddArtikelAdapater(Judul, downloadUrl, Isi, userName, kategoriArtikel);
                     artikelRef.child(uid).setValue(addArtikelData);
 
-                    Toast.makeText(AddArtikel.this, "Upload ArtikelAdapterSejarah "+Judul+" Berhasil", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(AddArtikel.this, "Upload Artikel "+Judul+" Berhasil", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddArtikel.this, ManageArtikelActivity.class);
                     startActivity(intent);
 

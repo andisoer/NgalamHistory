@@ -1,11 +1,11 @@
 package com.soerja.ngalamhistory.article.sejarah;
 
 
-public class ArtikelAdapterSejarah {
+public class ArtikelAdapter {
 
     public String judul_artikel, judul_gambar, kontent,uploader, kategori;
 
-    public ArtikelAdapterSejarah() {
+    public ArtikelAdapter() {
 
     }
 

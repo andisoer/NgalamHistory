@@ -1,14 +1,14 @@
 package com.soerja.ngalamhistory.manage_kategori;
 
-public class ListKategori {
+public class AddKategoriAdapter {
 
     private String jenis_kategori, gambar_kategori, deskripsi_kategori;
 
-    public ListKategori() {
+    public AddKategoriAdapter() {
 
     }
 
-    public ListKategori(String jenis_kategori, String gambar_kategori, String deskripsi_kategori) {
+    public AddKategoriAdapter(String jenis_kategori, String gambar_kategori, String deskripsi_kategori) {
         this.jenis_kategori = jenis_kategori;
         this.gambar_kategori = gambar_kategori;
         this.deskripsi_kategori = deskripsi_kategori;

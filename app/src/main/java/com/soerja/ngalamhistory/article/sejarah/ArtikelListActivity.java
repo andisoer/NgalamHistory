@@ -17,10 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.soerja.ngalamhistory.R;
 import com.squareup.picasso.Picasso;
 
-public class SejarahActivty extends AppCompatActivity {
+public class ArtikelListActivity extends AppCompatActivity {
 
     private RecyclerView listArt;
     private DatabaseReference artikelReference;
+    private String kategori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public class SejarahActivty extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        kategori = intent.getExtras().getString("kategori");
+
         artikelReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
 
         listArt = (RecyclerView) findViewById(R.id.recyclerview);
@@ -46,19 +50,18 @@ public class SejarahActivty extends AppCompatActivity {
 
     //Tampil ArtikelAdapterSejarah Firebase
     private void displayArtikel(){
-        FirebaseRecyclerAdapter<ArtikelAdapterSejarah, ViewHolderArtikel> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<ArtikelAdapterSejarah, ViewHolderArtikel>(
+        FirebaseRecyclerAdapter<ArtikelAdapter, ViewHolderArtikel> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<ArtikelAdapter, ViewHolderArtikel>(
 
-                        ArtikelAdapterSejarah.class,
+                        ArtikelAdapter.class,
                         R.layout.cardview_layout_article,
                         ViewHolderArtikel.class,
-                        artikelReference.orderByChild("kategori").equalTo("Sejarah")
+                        artikelReference.orderByChild("kategori").equalTo(kategori)
                 )
         {
                     @Override
-                    protected void populateViewHolder(ViewHolderArtikel viewHolder, ArtikelAdapterSejarah model, int position) {
+                    protected void populateViewHolder(ViewHolderArtikel viewHolder, ArtikelAdapter model, int position) {
                         final String id_artikel = getRef(position).getKey();
-                        final String judul_artikel = model.getJudul_artikel();
 
                         viewHolder.setJudul_artikel(model.getJudul_artikel());
                         viewHolder.setJudul_gambar(getApplicationContext(), model.getJudul_gambar());
@@ -66,7 +69,7 @@ public class SejarahActivty extends AppCompatActivity {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(SejarahActivty.this, SejarahArtActivity.class);
+                                Intent intent = new Intent(ArtikelListActivity.this, ArtikelActivity.class);
                                 intent.putExtra("id_artikel", id_artikel);
                                 startActivity(intent);
                             }

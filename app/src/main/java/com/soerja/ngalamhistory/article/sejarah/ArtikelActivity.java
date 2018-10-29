@@ -15,28 +15,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.soerja.ngalamhistory.ComentActivity;
-import com.soerja.ngalamhistory.DuluSekActivity;
 import com.soerja.ngalamhistory.R;
-import com.soerja.ngalamhistory.article.sejarah.photodesc.PhotoDescActivity;
 import com.squareup.picasso.Picasso;
 
-public class SejarahArtActivity extends AppCompatActivity {
+public class ArtikelActivity extends AppCompatActivity {
 
-    private TextView  tvDesc;
+    private TextView  tvDesc, jumlahLike;
     private ImageView ivCOL;
     private String Judul = null, id_artikel = null, userUID;
     private DatabaseReference artReference, likeReference, userRef;
     private FirebaseAuth mAuth;
     private ImageButton like;
     private boolean cekLike = false;
-
+    int countLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,21 +43,24 @@ public class SejarahArtActivity extends AppCompatActivity {
         Toolbar toolbarhisart = (Toolbar)findViewById(R.id.toolbarhisart);
         setSupportActionBar(toolbarhisart);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final CollapsingToolbarLayout collapstoolhisart = (CollapsingToolbarLayout)findViewById(R.id.coollapshisart);
+
         mAuth = FirebaseAuth.getInstance();
         artReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
         likeReference = FirebaseDatabase.getInstance().getReference().child("Likes");
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userUID = mAuth.getCurrentUser().getUid();
 
+        likeReference.keepSynced(true);
+
         Intent intent = getIntent();
         id_artikel = intent.getExtras().getString("id_artikel");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final CollapsingToolbarLayout collapstoolhisart = (CollapsingToolbarLayout)findViewById(R.id.coollapshisart);
+        collapstoolhisart.setCollapsedTitleTextColor(ContextCompat.getColor(ArtikelActivity.this, R.color.colorWhite ));
+        collapstoolhisart.setExpandedTitleColor(ContextCompat.getColor(ArtikelActivity.this, R.color.colorWhite));
 
-        collapstoolhisart.setCollapsedTitleTextColor(ContextCompat.getColor(SejarahArtActivity.this, R.color.colorWhite ));
-        collapstoolhisart.setExpandedTitleColor(ContextCompat.getColor(SejarahArtActivity.this, R.color.colorWhite));
-
+        jumlahLike = (TextView)findViewById(R.id.jumlahLike);
         tvDesc = (TextView)findViewById(R.id.Artic_desc);
         ivCOL = (ImageView)findViewById(R.id.imgcollaps);
 
@@ -78,7 +78,7 @@ public class SejarahArtActivity extends AppCompatActivity {
                 String judul_gambar = (String) dataSnapshot.child("judul_gambar").getValue();
 
                 collapstoolhisart.setTitle(judul_artikel);
-                Picasso.with(SejarahArtActivity.this).load(judul_gambar).into(ivCOL);
+                Picasso.with(ArtikelActivity.this).load(judul_gambar).into(ivCOL);
                 tvDesc.setText(kontent);
             }
 
@@ -116,37 +116,48 @@ public class SejarahArtActivity extends AppCompatActivity {
                     });
                 }
                 else{
-                    Toast.makeText(SejarahArtActivity.this, "Anda Harus Login Untuk Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ArtikelActivity.this, "Anda Harus Login Untuk Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
 
-        //Foto Deskripsi
-        btnPD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SejarahArtActivity.this, PhotoDescActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //Komment
         btnCMNT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SejarahArtActivity.this, ComentActivity.class);
+                Intent intent = new Intent(ArtikelActivity.this, ComentActivity.class);
+                intent.putExtra("id_artikel", id_artikel);
                 startActivity(intent);
             }
         });
 
-        //Dulu Sekarang
-        btnTN.setOnClickListener(new View.OnClickListener() {
+        setLikeBtn(id_artikel);
+
+    }
+
+    public void setLikeBtn(final String id_Artikel){
+        likeReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SejarahArtActivity.this, DuluSekActivity.class);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(id_Artikel).hasChild(mAuth.getCurrentUser().getUid())){
+
+                    like.setImageResource(R.drawable.ic_action_thumbup);
+                    countLikes = (int)dataSnapshot.child(id_Artikel).getChildrenCount();
+                    jumlahLike.setText(Integer.toString(countLikes));
+                }
+                else{
+                    like.setImageResource(R.drawable.ic_action_thumbupblack);
+                    countLikes = (int)dataSnapshot.child(id_Artikel).getChildrenCount();
+                    jumlahLike.setText(Integer.toString(countLikes));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

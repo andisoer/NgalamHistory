@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         //Button Deklarasi
         forget = (Button)findViewById(R.id.forgetpass);
         regis = (Button)findViewById(R.id.regis);

@@ -1,6 +1,9 @@
 package com.soerja.ngalamhistory.manage_kategori;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -11,12 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.soerja.ngalamhistory.R;
+import com.squareup.picasso.Picasso;
 
 public class ManageKategori extends AppCompatActivity {
 
@@ -46,37 +51,12 @@ public class ManageKategori extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addKategori();
+                Intent intent = new Intent(ManageKategori.this, AddKategori.class);
+                startActivity(intent);
             }
         });
 
         displayKategori();
-    }
-
-    private void addKategori() {
-        AlertDialog.Builder InputKategori = new AlertDialog.Builder(ManageKategori.this);
-        LayoutInflater layoutInflater = LayoutInflater.from(ManageKategori.this);
-        InputKategori.setTitle("Tambah Kategori");
-
-        input = new EditText(this);
-        InputKategori.setView(input);
-
-        InputKategori.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String kategori = input.getText().toString().trim();
-                FirebaseDatabase.getInstance().getReference("Kategori").push().child("Jenis_Kategori").setValue(kategori);
-            }
-        });
-        InputKategori.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        AlertDialog alertDialog = InputKategori.create();
-        alertDialog.show();
     }
 
     private void displayKategori() {
@@ -90,7 +70,9 @@ public class ManageKategori extends AppCompatActivity {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolderKategori viewHolder, ListKategori model, int position) {
-                        viewHolder.setJenis_Kategori(model.getJenis_Kategori());
+                        viewHolder.setJenis_kategori(model.getJenis_kategori());
+                        viewHolder.setGambar_kategori(getApplicationContext(), model.getGambar_kategori());
+                        viewHolder.setDeskripsi_kategori(model.getDeskripsi_kategori());
                     }
                 };
 
@@ -105,9 +87,19 @@ public class ManageKategori extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setJenis_Kategori(String jenis_Kategori){
-            TextView Kategori = (TextView)mView.findViewById(R.id.nama_kategori);
-            Kategori.setText(jenis_Kategori);
+        public void setJenis_kategori(String jenis_kategori){
+            TextView judul_kategori = (TextView)mView.findViewById(R.id.nama_kategori);
+            judul_kategori.setText(jenis_kategori);
+        }
+
+        public void setGambar_kategori(Context ctx, String gambar_kategori){
+            ImageView kategori_gambar = (ImageView)mView.findViewById(R.id.gambar_kategori);
+            Picasso.with(ctx).load(gambar_kategori).into(kategori_gambar);
+        }
+
+        public void setDeskripsi_kategori(String deskripsi_kategori){
+            TextView deskripsiKategori = (TextView)mView.findViewById(R.id.deskripsi_kategori_list);
+            deskripsiKategori.setText(deskripsi_kategori);
         }
     }
 }

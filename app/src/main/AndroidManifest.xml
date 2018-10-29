@@ -34,37 +34,31 @@
         <activity android:name=".AboutActivity" android:parentActivityName=".MainActivity">
         </activity>
 
-        <activity android:name=".SettingActivity" android:parentActivityName=".MainActivity">
+        <activity android:name=".SettingActivity" android:parentActivityName=".MainActivity" >
         </activity>
 
-        <activity android:name=".MakananActivity" >
+        <activity android:name=".article.sejarah.ArtikelListActivity" android:parentActivityName=".MainActivity">
         </activity>
 
-        <activity android:name=".article.sejarah.SejarahActivty" android:parentActivityName=".MainActivity">
+        <activity android:name=".ComentActivity" android:parentActivityName=".article.sejarah.ArtikelActivity">
         </activity>
 
-        <activity android:name=".article.sejarah.SejarahArtActivity" android:parentActivityName=".article.sejarah.SejarahActivty" >
+        <activity android:name=".article.sejarah.ArtikelActivity" android:parentActivityName=".article.sejarah.ArtikelListActivity" >
         </activity>
 
-        <activity android:name=".article.sejarah.photodesc.PhotoDescActivity" android:parentActivityName=".article.sejarah.SejarahArtActivity">
-        </activity>
-
-        <activity android:name=".SenbudActivity" >
-        </activity>
-
-        <activity android:name=".ComentActivity" android:parentActivityName=".article.sejarah.SejarahArtActivity" >
-        </activity>
-
-        <activity android:name=".DuluSekActivity" android:parentActivityName=".article.sejarah.SejarahArtActivity" >
-        </activity>
-
-        <activity android:name=".LikedActivity" android:parentActivityName=".MainActivity" >
+        <activity android:name=".article.sejarah.photodesc.PhotoDescActivity" android:parentActivityName=".article.sejarah.ArtikelActivity">
         </activity>
 
         <activity android:name=".AllArtActivity" android:parentActivityName=".MainActivity" >
         </activity>
 
+        <activity android:name=".LikedActivity" android:parentActivityName=".MainActivity" >
+        </activity>
+
         <activity android:name=".RecomendedActivity" android:parentActivityName=".MainActivity" >
+        </activity>
+
+        <activity android:name=".DuluSekActivity" android:parentActivityName=".article.sejarah.ArtikelActivity" >
         </activity>
 
         <activity android:name=".PhotoDLActivity" android:parentActivityName=".article.sejarah.photodesc.PhotoDescActivity" >
@@ -83,6 +77,9 @@
         </activity>
 
         <activity android:name=".manage_kategori.ManageKategori" android:parentActivityName=".ManageContent">
+        </activity>
+
+        <activity android:name=".manage_kategori.AddKategori" android:parentActivityName=".manage_kategori.ManageKategori">
         </activity>
 
         <activity android:name=".manage_artikel.ManageArtikelActivity" android:parentActivityName=".ManageContent">
