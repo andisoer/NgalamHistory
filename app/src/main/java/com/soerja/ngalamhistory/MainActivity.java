@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.soerja.ngalamhistory.article.sejarah.ArtikelListActivity;
 import com.soerja.ngalamhistory.manage_kategori.ListKategori;
+import com.soerja.ngalamhistory.article.sejarah.AllArtActivity;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,30 +40,37 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference referenceKategori;
     private RecyclerView  recyclerView;
-    private String kategori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ///////////////////////////////////////////////////////////
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.AppThemeBrown);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
+        ///////////////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarmain);
+        Toolbar toolbar = findViewById(R.id.toolbarmain);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         referenceKategori = FirebaseDatabase.getInstance().getReference().child("Kategori");
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerviewMainActivity);
+        recyclerView = findViewById(R.id.recyclerviewMainActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        DL = (DrawerLayout)findViewById(R.id.activity_main);
+        DL = findViewById(R.id.activity_main);
         swipe = new ActionBarDrawerToggle(MainActivity.this, DL,R.string.Open, R.string.Close);
 
         DL.addDrawerListener(swipe);
         swipe.syncState();
 
-        NV = (NavigationView)findViewById(R.id.navbar);
+        NV = findViewById(R.id.navbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -128,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         viewHolder.setGambar_kategori(getApplicationContext(), model.getGambar_kategori());
                         viewHolder.setDeskripsi_kategori(model.getDeskripsi_kategori());
 
-                        kategori = model.getJenis_kategori();
+                        final String kategori = model.getJenis_kategori();
 
                         viewHolder.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -152,22 +161,22 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
 
-            button = (Button)mView.findViewById(R.id.button);
+            button = mView.findViewById(R.id.button);
 
         }
 
         public void setJenis_kategori(String jenis_kategori){
-            TextView judul_kategori = (TextView)mView.findViewById(R.id.judul_kategori_main);
+            TextView judul_kategori = mView.findViewById(R.id.judul_kategori_main);
             judul_kategori.setText(jenis_kategori);
         }
 
         public void setGambar_kategori(Context ctx, String gambar_kategori){
-            ImageView gambar_kategori_home = (ImageView)mView.findViewById(R.id.kategoriGambarMainActivity);
+            ImageView gambar_kategori_home = mView.findViewById(R.id.kategoriGambarMainActivity);
             Picasso.with(ctx).load(gambar_kategori).into(gambar_kategori_home);
         }
 
         public void setDeskripsi_kategori(String deskripsi_kategori){
-            TextView deskripsi_kategori_main = (TextView)mView.findViewById(R.id.deskripsi_singkat_kategori_main);
+            TextView deskripsi_kategori_main = mView.findViewById(R.id.deskripsi_singkat_kategori_main);
             deskripsi_kategori_main.setText(deskripsi_kategori);
         }
     }
@@ -220,4 +229,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(Item);
     }
+
+
 }

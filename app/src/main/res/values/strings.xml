@@ -29,5 +29,10 @@ Sed rutrum nulla magna, ac sodales odio sagittis ut. Morbi finibus nisl velit, a
     <string name="DummyText3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper magna vel ligula faucibus sodales. Mauris eu fermentum sapien. Proin purus sem, viverra pretium urna vitae, ultricies aliquam justo. Maecenas nibh nulla, dapibus ac vulputate eu, aliquet ac ex. Proin in ipsum augue.</string>
     <string name="shared_view_transition">Transition</string>
     <string name="menu">&#8942;</string>
+    
+    <string-array name="themearray">
+        <item>Hijau</item>
+        <item>Cokelat</item>
+    </string-array>
 
 </resources>

@@ -16,18 +16,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?android:attr/actionBarSize"
-                android:background="@color/colorPrimary"
+                android:background="?attr/colorPrimary"
                 app:titleTextColor="@android:color/white"
                 android:elevation="4dp"
                 android:fitsSystemWindows="true">
 
-                <TextView
-                    android:id="@+id/tbtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sejarah Malang"
-                    android:textColor="@android:color/white"
-                    style="@style/TextAppearance.AppCompat.Title"/>
 
             </android.support.v7.widget.Toolbar>
 

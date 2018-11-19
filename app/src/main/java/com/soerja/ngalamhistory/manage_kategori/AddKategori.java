@@ -48,7 +48,7 @@ public class AddKategori extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_add_kategori);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarTambahKategori);
+        Toolbar toolbar = findViewById(R.id.toolbarTambahKategori);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -60,10 +60,10 @@ public class AddKategori extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUSER = firebaseAuth.getCurrentUser().getUid();
 
-        namaKategori = (EditText)findViewById(R.id.judul_kategori);
-        deskripsiKategori = (EditText)findViewById(R.id.deskripsi_kategori);
-        submitKategori = (Button)findViewById(R.id.tambah_kategori);
-        pilihGambarKategori = (ImageButton)findViewById(R.id.gambar_kategori);
+        namaKategori = findViewById(R.id.judul_kategori);
+        deskripsiKategori = findViewById(R.id.deskripsi_kategori);
+        submitKategori = findViewById(R.id.tambah_kategori);
+        pilihGambarKategori = findViewById(R.id.gambar_kategori);
 
         pilihGambarKategori.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +109,7 @@ public class AddKategori extends AppCompatActivity {
 
         namaGambar = saveCurrentDate;
 
-        final StorageReference pathFile = imgReference.child("Judul_Gambar_Kategori");
+        final StorageReference pathFile = imgReference.child("Judul_Gambar_Kategori").child(gambarUri.getLastPathSegment()+namaGambar+".jpeg");
 
         pathFile.putFile(gambarUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override

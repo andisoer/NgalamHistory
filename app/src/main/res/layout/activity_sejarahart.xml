@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                >
 
             </android.support.v7.widget.Toolbar>
 
@@ -136,6 +137,7 @@
                         </LinearLayout>
 
                         <Button
+                            android:id="@+id/map"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:drawableRight="@drawable/ic_action_map"

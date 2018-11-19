@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.soerja.ngalamhistory.R;
@@ -39,7 +41,7 @@ public class ManageKategori extends AppCompatActivity {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.admin_manage_kategori);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarmanageKategori);
+        Toolbar toolbar = findViewById(R.id.toolbarmanageKategori);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -47,10 +49,13 @@ public class ManageKategori extends AppCompatActivity {
 
         referenceKategori = FirebaseDatabase.getInstance().getReference().child("Kategori");
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerviewManageKategori);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ManageKategori.this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ManageKategori.this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView = findViewById(R.id.recyclerviewManageKategori);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        fab = (FloatingActionButton)findViewById(R.id.fab_add_category);
+        fab = findViewById(R.id.fab_add_category);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +82,10 @@ public class ManageKategori extends AppCompatActivity {
                         viewHolder.setJenis_kategori(model.getJenis_kategori());
                         viewHolder.setGambar_kategori(getApplicationContext(), model.getGambar_kategori());
                         viewHolder.setDeskripsi_kategori(model.getDeskripsi_kategori());
+
+                        final String judulKategori = model.getJenis_kategori();
+                        final String id_kategori = getRef(position).getKey();
+
                         viewHolder.menu.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -90,12 +99,11 @@ public class ManageKategori extends AppCompatActivity {
                                                 Toast.makeText(ManageKategori.this, "Edit", Toast.LENGTH_SHORT).show();
                                                 break;
                                             case R.id.kategori_delete:
-                                                Toast.makeText(ManageKategori.this, "Delete", Toast.LENGTH_SHORT).show();
+                                                tampilDialogDelete(judulKategori, id_kategori);
                                                 break;
                                             default:
                                                 break;
                                         }
-
                                         return false;
                                     }
                                 });
@@ -108,6 +116,34 @@ public class ManageKategori extends AppCompatActivity {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
+    private void tampilDialogDelete(final String judulKategori, final String id_kategori) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ManageKategori.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(ManageKategori.this);
+        alertDialog.setTitle("Delete Kategori");
+        alertDialog.setMessage("Delete Kategori "+judulKategori+" ?");
+
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                referenceKategori.child(id_kategori).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(ManageKategori.this, "Kategori "+judulKategori+" Berhasil Dihapus !", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertDialog1 = alertDialog.create();
+        alertDialog1.show();
+    }
+
     public static class ViewHolderKategori extends RecyclerView.ViewHolder{
         View mView;
         TextView menu;
@@ -116,21 +152,21 @@ public class ManageKategori extends AppCompatActivity {
             super(itemView);
             mView = itemView;
 
-            menu = (TextView)mView.findViewById(R.id.menu_kategori);
+            menu = mView.findViewById(R.id.menu_kategori);
         }
 
         public void setJenis_kategori(String jenis_kategori){
-            TextView judul_kategori = (TextView)mView.findViewById(R.id.nama_kategori);
+            TextView judul_kategori = mView.findViewById(R.id.nama_kategori);
             judul_kategori.setText(jenis_kategori);
         }
 
         public void setGambar_kategori(Context ctx, String gambar_kategori){
-            ImageView kategori_gambar = (ImageView)mView.findViewById(R.id.gambar_kategori);
+            ImageView kategori_gambar = mView.findViewById(R.id.gambar_kategori);
             Picasso.with(ctx).load(gambar_kategori).into(kategori_gambar);
         }
 
         public void setDeskripsi_kategori(String deskripsi_kategori){
-            TextView deskripsiKategori = (TextView)mView.findViewById(R.id.deskripsi_kategori_list);
+            TextView deskripsiKategori = mView.findViewById(R.id.deskripsi_kategori_list);
             deskripsiKategori.setText(deskripsi_kategori);
         }
     }

@@ -39,16 +39,19 @@ public class ManageArtikelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_manage_artikel);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarmanageArtikel);
+        Toolbar toolbar = findViewById(R.id.toolbarmanageArtikel);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerviewManageArtikel);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ManageArtikelActivity.this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView = findViewById(R.id.recyclerviewManageArtikel);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        fab = (FloatingActionButton)findViewById(R.id.fab_add_artikel);
+        fab = findViewById(R.id.fab_add_artikel);
 
         artikelAdminReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
 
@@ -148,21 +151,21 @@ public class ManageArtikelActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
 
-            menu_artikel = (TextView)mView.findViewById(R.id.menu_artikel_admin);
+            menu_artikel = mView.findViewById(R.id.menu_artikel_admin);
         }
 
         public void setJudul_artikel(Context ctx, String judul_artikel){
-            ImageView judul_gambar = (ImageView)mView.findViewById(R.id.titleArtikelAdminGambar);
+            ImageView judul_gambar = mView.findViewById(R.id.titleArtikelAdminGambar);
             Picasso.with(ctx).load(judul_artikel).into(judul_gambar);
         }
 
         public void setJudul_artikel(String judul_artikel){
-            TextView judul = (TextView)mView.findViewById(R.id.titleArtikelAdmin);
+            TextView judul = mView.findViewById(R.id.titleArtikelAdmin);
             judul.setText(judul_artikel);
         }
 
         public void setKategori(String kategori){
-            TextView kategori_artikel_admin = (TextView)mView.findViewById(R.id.kategoriArtikelAdmin);
+            TextView kategori_artikel_admin = mView.findViewById(R.id.kategoriArtikelAdmin);
             kategori_artikel_admin.setText(kategori);
         }
 

@@ -16,9 +16,9 @@
             <ImageView
                 android:id="@+id/kategoriGambarMainActivity"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:background="@color/colorBackground"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"/>
 
             <LinearLayout
@@ -32,7 +32,7 @@
                     android:id="@+id/judul_kategori_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="?attr/colorPrimaryDark"
                     android:textSize="19sp"
                     android:text="Judul Kategori"
                     android:layout_marginBottom="10dp"/>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,33 +23,42 @@ public class ArtikelListActivity extends AppCompatActivity {
     private RecyclerView listArt;
     private DatabaseReference artikelReference;
     private String kategori;
+    private TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ///////////////////////////////////////////////////////////
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.AppThemeBrown);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
+        ///////////////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sejarah);
 
         //Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarhis);
+        Toolbar toolbar = findViewById(R.id.toolbarhis);
         setSupportActionBar(toolbar);
 
         //Toolbar as Actionbar
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         kategori = intent.getExtras().getString("kategori");
-
         artikelReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
 
-        listArt = (RecyclerView) findViewById(R.id.recyclerview);
+        getSupportActionBar().setTitle(kategori);
+
+        listArt = findViewById(R.id.recyclerview);
         listArt.setLayoutManager(new GridLayoutManager(this, 2));
 
         displayArtikel();
 
     }
 
-    //Tampil ArtikelAdapterSejarah Firebase
+    //Tampil Artikel Firebase
     private void displayArtikel(){
         FirebaseRecyclerAdapter<ArtikelAdapter, ViewHolderArtikel> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<ArtikelAdapter, ViewHolderArtikel>(
@@ -92,12 +102,12 @@ public class ArtikelListActivity extends AppCompatActivity {
         }
 
         public void setJudul_artikel(String judul_artikel){
-            TextView judulArtikel = (TextView)mView.findViewById(R.id.judulart_id_list);
+            TextView judulArtikel = mView.findViewById(R.id.judulart_id_list);
             judulArtikel.setText(judul_artikel);
         }
 
         public void setJudul_gambar(Context ctx, String judul_gambar){
-            ImageView judulGambar = (ImageView)mView.findViewById(R.id.gambarart_id_list);
+            ImageView judulGambar = mView.findViewById(R.id.gambarart_id_list);
             Picasso.with(ctx).load(judul_gambar).into(judulGambar);
 
         }

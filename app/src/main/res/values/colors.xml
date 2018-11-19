@@ -7,4 +7,11 @@
     <color name="colorBackground">#e0e0e0</color>
     <color name="colorWhite">#ffffff</color>
 
+    <color name="colorPrimaryBrown">#f57c00</color>
+    <color name="colorPrimaryDarkBrown">#bb4d00</color>
+    <color name="colorAccentBrown">#c77800</color>
+    <color name="colorPrimLightBrown">#ffad42</color>
+    <color name="colorBackgroundBrown">#e0e0e0</color>
+    <color name="colorWhiteBrown">#ffffff</color>
+
 </resources>

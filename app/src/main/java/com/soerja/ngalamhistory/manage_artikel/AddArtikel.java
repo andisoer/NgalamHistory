@@ -54,7 +54,7 @@ public class AddArtikel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_add_artikel);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarTambahArtikel);
+        Toolbar toolbar = findViewById(R.id.toolbarTambahArtikel);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -67,11 +67,11 @@ public class AddArtikel extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         artikelRef = FirebaseDatabase.getInstance().getReference("Artikel");
 
-        kategori = (Spinner)findViewById(R.id.SpinnerkategoriArtikel);
-        uploadArtikel = (Button)findViewById(R.id.TambahArtikel);
-        TitleIMGArt = (ImageButton)findViewById(R.id.ImageTitleArtikel);
-        titleArt = (EditText)findViewById(R.id.TitleArtikel);
-        isiArt = (EditText)findViewById(R.id.ArticleContent);
+        kategori = findViewById(R.id.SpinnerkategoriArtikel);
+        uploadArtikel = findViewById(R.id.TambahArtikel);
+        TitleIMGArt = findViewById(R.id.ImageTitleArtikel);
+        titleArt = findViewById(R.id.TitleArtikel);
+        isiArt = findViewById(R.id.ArticleContent);
 
         TitleIMGArt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class AddArtikel extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()){
-                    String kategori = dataSnapshot2.child("Jenis_Kategori").getValue().toString();
+                    String kategori = dataSnapshot2.child("jenis_kategori").getValue().toString();
                     dataKategory.add(kategori);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddArtikel.this, android.R.layout.simple_spinner_dropdown_item, dataKategory);
@@ -116,10 +116,10 @@ public class AddArtikel extends AppCompatActivity {
             Toast.makeText(AddArtikel.this, "Pilih Gambar Untuk Judul Artikel !", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Judul)){
-            Toast.makeText(AddArtikel.this, "Isi Judul ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Isi Judul Artikel !", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Isi)){
-            Toast.makeText(AddArtikel.this, "Isi Konten ArtikelAdapterSejarah !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddArtikel.this, "Isi Konten Artikel !", Toast.LENGTH_SHORT).show();
         }else{
             showProgressDialog();
             SaveImageToStorage();

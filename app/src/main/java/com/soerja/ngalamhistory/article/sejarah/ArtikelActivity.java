@@ -1,11 +1,13 @@
 package com.soerja.ngalamhistory.article.sejarah;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -27,23 +29,32 @@ public class ArtikelActivity extends AppCompatActivity {
 
     private TextView  tvDesc, jumlahLike;
     private ImageView ivCOL;
-    private String Judul = null, id_artikel = null, userUID;
+    private String Judul = null, id_artikel = null, userUID, judul_artikel, kontent, judul_gambar;
     private DatabaseReference artReference, likeReference, userRef;
     private FirebaseAuth mAuth;
     private ImageButton like;
+    private Button maps;
     private boolean cekLike = false;
     int countLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        ///////////////////////////////////////////////////////////
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.AppThemeBrown);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
+        ///////////////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sejarahart);
 
-        Toolbar toolbarhisart = (Toolbar)findViewById(R.id.toolbarhisart);
+        Toolbar toolbarhisart = findViewById(R.id.toolbarhisart);
         setSupportActionBar(toolbarhisart);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final CollapsingToolbarLayout collapstoolhisart = (CollapsingToolbarLayout)findViewById(R.id.coollapshisart);
+        final CollapsingToolbarLayout collapstoolhisart = findViewById(R.id.coollapshisart);
 
         mAuth = FirebaseAuth.getInstance();
         artReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
@@ -59,22 +70,23 @@ public class ArtikelActivity extends AppCompatActivity {
         collapstoolhisart.setCollapsedTitleTextColor(ContextCompat.getColor(ArtikelActivity.this, R.color.colorWhite ));
         collapstoolhisart.setExpandedTitleColor(ContextCompat.getColor(ArtikelActivity.this, R.color.colorWhite));
 
-        jumlahLike = (TextView)findViewById(R.id.jumlahLike);
-        tvDesc = (TextView)findViewById(R.id.Artic_desc);
-        ivCOL = (ImageView)findViewById(R.id.imgcollaps);
+        jumlahLike = findViewById(R.id.jumlahLike);
+        tvDesc = findViewById(R.id.Artic_desc);
+        ivCOL = findViewById(R.id.imgcollaps);
 
         //Deklarasi Button
-        Button btnPD = (Button)findViewById(R.id.btPhotoDesc);
-        Button btnCMNT = (Button)findViewById(R.id.comment);
-        Button btnTN = (Button)findViewById(R.id.thennow);
-        like = (ImageButton)findViewById(R.id.likeButton);
+        Button btnPD = findViewById(R.id.btPhotoDesc);
+        Button btnCMNT = findViewById(R.id.comment);
+        Button btnTN = findViewById(R.id.thennow);
+        maps = findViewById(R.id.map);
+        like = findViewById(R.id.likeButton);
 
         artReference.child(id_artikel).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String judul_artikel = (String) dataSnapshot.child("judul_artikel").getValue();
-                String kontent = (String) dataSnapshot.child("kontent").getValue();
-                String judul_gambar = (String) dataSnapshot.child("judul_gambar").getValue();
+                judul_artikel = (String) dataSnapshot.child("judul_artikel").getValue();
+                kontent = (String) dataSnapshot.child("kontent").getValue();
+                judul_gambar = (String) dataSnapshot.child("judul_gambar").getValue();
 
                 collapstoolhisart.setTitle(judul_artikel);
                 Picasso.with(ArtikelActivity.this).load(judul_gambar).into(ivCOL);
@@ -131,8 +143,22 @@ public class ArtikelActivity extends AppCompatActivity {
             }
         });
 
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                keMap(judul_artikel);
+            }
+        });
+
         setLikeBtn(id_artikel);
 
+    }
+
+    private void keMap(String judul_artikel) {
+        Uri UriKoordinat = Uri.parse("geo:-7.9786395,112.5617424?q="+judul_artikel+"");
+        Intent intentMap = new Intent(Intent.ACTION_VIEW, UriKoordinat);
+        intentMap.setPackage("com.google.android.apps.maps");
+        startActivity(intentMap);
     }
 
     public void setLikeBtn(final String id_Artikel){

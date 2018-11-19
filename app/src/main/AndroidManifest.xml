@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyC_cmY14nDS6BptFXOESNPRroY__Uld_5w"/>
+        <meta-data android:name="com.google.android.gms.version"
+                   android:value="@integer/google_play_services_version"/>
+
         <activity android:name=".SplashActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +54,7 @@
         <activity android:name=".article.sejarah.photodesc.PhotoDescActivity" android:parentActivityName=".article.sejarah.ArtikelActivity">
         </activity>
 
-        <activity android:name=".AllArtActivity" android:parentActivityName=".MainActivity" >
+        <activity android:name=".article.sejarah.AllArtActivity" android:parentActivityName=".MainActivity" >
         </activity>
 
         <activity android:name=".LikedActivity" android:parentActivityName=".MainActivity" >

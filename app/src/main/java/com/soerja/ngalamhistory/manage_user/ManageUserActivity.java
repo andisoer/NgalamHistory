@@ -28,15 +28,17 @@ public class ManageUserActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_manageuser);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarmanageuser);
+        Toolbar toolbar = findViewById(R.id.toolbarmanageuser);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView = findViewById(R.id.recyclerviewuser);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ManageUserActivity.this));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         userReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -115,25 +117,25 @@ public class ManageUserActivity extends AppCompatActivity{
         }
 
         public void setEmail(String email){
-            TextView eMail = (TextView)mView.findViewById(R.id.emailuser);
+            TextView eMail = mView.findViewById(R.id.emailuser);
             eMail.setText(email);
 
         }
 
         public void setPass(String pass){
-            TextView Pass = (TextView)mView.findViewById(R.id.passwordUser);
+            TextView Pass = mView.findViewById(R.id.passwordUser);
             Pass.setText(pass);
 
         }
 
         public void setType(String type){
-            TextView Type = (TextView)mView.findViewById(R.id.typeUser);
+            TextView Type = mView.findViewById(R.id.typeUser);
             Type.setText(type);
 
         }
 
         public void setUserName(String userName){
-            TextView Username = (TextView)mView.findViewById(R.id.username);
+            TextView Username = mView.findViewById(R.id.username);
             Username.setText(userName);
         }
 
