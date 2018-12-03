@@ -14,19 +14,12 @@ import android.widget.Switch;
 
 public class SettingActivity extends AppCompatActivity{
 
-    private Switch switchTheme;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        ///////////////////////////////////////////////////////////
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.AppThemeBrown);
-        }
-        else{
-            setTheme(R.style.AppTheme);
-        }
-        ///////////////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_setting);
 
         Toolbar toolbar = findViewById(R.id.toolbarset);
@@ -35,31 +28,37 @@ public class SettingActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        switchTheme = findViewById(R.id.switchTema);
+        spinnerSelectionTheme();
+    }
 
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            switchTheme.setChecked(true);
-        }
+    private void spinnerSelectionTheme() {
+        spinner = findViewById(R.id.spinnerTema);
+        spinner.setSelection(ThemeApplication.currentPosition);
+        ThemeApplication.currentPosition = spinner.getSelectedItemPosition();
 
-        switchTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    restartApp();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(ThemeApplication.currentPosition != i){
+                    Utils.changeToTheme(SettingActivity.this, i);
                 }
-                else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    restartApp();
-                }
+                ThemeApplication.currentPosition = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
 
-    private void restartApp() {
-        Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
-        startActivity(intent);
-        finish();
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return true;
     }
-
 }

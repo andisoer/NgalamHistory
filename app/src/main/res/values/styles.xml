@@ -9,7 +9,20 @@
         <item name="windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/DrawerIconColor</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrowback</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
+
+    <style name="AppThemeBrown" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryBrown</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBrown</item>
+        <item name="colorAccent">@color/colorAccentBrown</item>
+        <item name="windowNoTitle">true</item>
+        <item name="drawerArrowStyle">@style/DrawerIconColor</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_arrowback</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
 
     <!-- Button Style -->
     <style name="FlatButton" parent="Theme.AppCompat.Light">

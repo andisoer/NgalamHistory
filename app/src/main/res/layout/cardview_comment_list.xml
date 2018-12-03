@@ -15,18 +15,24 @@
             android:layout_marginLeft="5dp"
             android:padding="5dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/usernameKomen"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:text="Username" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/usernameKomen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:text="Username" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -34,7 +40,7 @@
                     android:padding="1dp"
                     android:background="@color/colorBackground"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/komenUser"

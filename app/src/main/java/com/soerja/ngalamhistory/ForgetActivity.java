@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -32,8 +33,8 @@ public class ForgetActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        forgetEmail = (EditText)findViewById(R.id.emailforget);
-        btnForget = (Button)findViewById(R.id.sendForget);
+        forgetEmail = findViewById(R.id.emailforget);
+        btnForget = findViewById(R.id.sendForget);
 
         firebaseAuth = FirebaseAuth.getInstance();
 

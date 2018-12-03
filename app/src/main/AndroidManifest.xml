@@ -63,9 +63,6 @@
         <activity android:name=".RecomendedActivity" android:parentActivityName=".MainActivity" >
         </activity>
 
-        <activity android:name=".DuluSekActivity" android:parentActivityName=".article.sejarah.ArtikelActivity" >
-        </activity>
-
         <activity android:name=".PhotoDLActivity" android:parentActivityName=".article.sejarah.photodesc.PhotoDescActivity" >
         </activity>
 

@@ -43,15 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ///////////////////////////////////////////////////////////
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.AppThemeBrown);
-        }
-        else{
-            setTheme(R.style.AppTheme);
-        }
-        ///////////////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbarmain);
@@ -223,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem Item){
-
         if(swipe.onOptionsItemSelected(Item))
             return true;
 

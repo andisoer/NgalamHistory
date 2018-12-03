@@ -51,15 +51,15 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        formEmail = (TextInputEditText)findViewById(R.id.emaillog);
-        formPass = (TextInputEditText)findViewById(R.id.passlog);
+        formEmail = findViewById(R.id.emaillog);
+        formPass = findViewById(R.id.passlog);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         //Button Deklarasi
-        forget = (Button)findViewById(R.id.forgetpass);
-        regis = (Button)findViewById(R.id.regis);
-        login = (Button)findViewById(R.id.btLogin);
+        forget = findViewById(R.id.forgetpass);
+        regis = findViewById(R.id.regis);
+        login = findViewById(R.id.btLogin);
 
 
         //Lupa Password
@@ -115,15 +115,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     //Method onAuthSuccess()
     private void onAuthSuccess(FirebaseUser user) {//Memanggil Data User yang login
         if(user != null){//Jika User Tidak Kosong
             reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("type");//Membuat Reference dengan isi tabel "Users" dan
-                                                                                                                        //kolomnya "type"
-                                                                                                                        //type berisi user atau admin
+                                                                                                                        //kolomnya "type"//type berisi user atau admin
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

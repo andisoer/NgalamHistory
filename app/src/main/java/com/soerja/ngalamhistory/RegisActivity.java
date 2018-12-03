@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,16 +34,16 @@ public class RegisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regis);
 
-        Toolbar tbREG = (Toolbar)findViewById(R.id.toolbarreg);
+        Toolbar tbREG = findViewById(R.id.toolbarreg);
         setSupportActionBar(tbREG);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Inisialisasi btn, TIET, PB
-        btnReg = (Button)findViewById(R.id.btnReg);
-        passReg = (TextInputEditText)findViewById(R.id.passreg);
-        emailReg = (TextInputEditText)findViewById(R.id.emailreg);
-        userReg = (TextInputEditText)findViewById(R.id.username);
+        btnReg = findViewById(R.id.btnReg);
+        passReg = findViewById(R.id.passreg);
+        emailReg = findViewById(R.id.emailreg);
+        userReg = findViewById(R.id.username);
 
         auth = FirebaseAuth.getInstance();
 
