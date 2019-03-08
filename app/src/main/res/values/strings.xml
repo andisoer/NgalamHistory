@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">NgalamHistory</string>
 
+    <string name="admob_app_id">ca-app-pub-8301442783361420~5391578622</string>
+    <string name="banner_ads_footer_home_test">ca-app-pub-3940256099942544/6300978111</string>
+
     <!-- String ActMain Java -->
     <string name="Open">Open</string>
     <string name="Close">Close</string>

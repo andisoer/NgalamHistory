@@ -12,9 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class SettingActivity extends AppCompatActivity{
 
     private Spinner spinner;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -29,6 +33,16 @@ public class SettingActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerSelectionTheme();
+
+        /////Test adMob
+        adView = findViewById(R.id.adViewBannerFooterSettings);
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("A3PFG17A14004363")
+                .build();
+
+        adView.loadAd(adRequest);
+        /////
     }
 
     private void spinnerSelectionTheme() {

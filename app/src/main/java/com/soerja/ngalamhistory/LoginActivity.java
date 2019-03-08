@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,11 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Toolbar As ActionBar
-        Toolbar toolbar = findViewById(R.id.toolbarlog);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         formEmail = findViewById(R.id.emaillog);
         formPass = findViewById(R.id.passlog);
 
@@ -60,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         forget = findViewById(R.id.forgetpass);
         regis = findViewById(R.id.regis);
         login = findViewById(R.id.btLogin);
-
 
         //Lupa Password
         forget.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     else{
                                         Toast.makeText(LoginActivity.this, "User Tidak Ditemukan!", Toast.LENGTH_SHORT).show();
+                                        return;
                                     }
                                 }
                             });
@@ -115,6 +111,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        if(firebaseAuth.getCurrentUser() != null){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     //Method onAuthSuccess()
@@ -132,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         }else{//Lainnya, jika type tidak sama dengan Admin, Ke halaman user
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            Toast.makeText(LoginActivity.this, "Anda Login Sebagai User", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                 }
@@ -151,26 +151,4 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
         dialog.setCancelable(true);
     }
-
-
-    // Tombol Home
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.main_toolbar_btngreen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        if(id == R.id.Home){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

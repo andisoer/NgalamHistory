@@ -11,37 +11,31 @@
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_centerInParent="true"  >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarlog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:fitsSystemWindows="true"
-            android:minHeight="?android:attr/actionBarSize"
-            app:titleTextColor="@android:color/white">
-
-            <TextView
-                android:id="@+id/tbtext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:textColor="?attr/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Title"/>
-
-        </android.support.v7.widget.Toolbar>
+        <TextView
+           android:id="@+id/tbtext"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Silahkan Login"
+           android:textColor="?attr/colorPrimary"
+           android:layout_marginLeft="10dp"
+           android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/logo" />
 
         <android.support.design.widget.TextInputLayout
@@ -63,7 +57,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/passlog"

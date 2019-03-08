@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout DL;
     private ActionBarDrawerToggle swipe;
     private NavigationView NV;
+    private AdView mAdview;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference referenceKategori;
@@ -51,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /// Test adMob
+        mAdview = findViewById(R.id.adViewBannerFooter);
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("A3PFG17A14004363")
+                .build();
+
+        mAdview.loadAd(adRequest);
+        /////
 
         referenceKategori = FirebaseDatabase.getInstance().getReference().child("Kategori");
 
@@ -95,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.LogOut:
                         showDialog();
-
-
                 }
                 return true;
             }
@@ -221,6 +234,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(Item);
     }
-
-
 }

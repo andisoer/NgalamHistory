@@ -25,9 +25,9 @@ import com.squareup.picasso.Picasso;
 
 public class LikedActivity extends AppCompatActivity {
 
-    private DatabaseReference likedReference;
+    private DatabaseReference likedReference, artikelReference, sortArtikel;
     private FirebaseAuth mAuth;
-    private String userUID;
+    private String userUID, likedPost;
     private RecyclerView listArtLiked;
 
     @Override
@@ -40,32 +40,18 @@ public class LikedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        likedReference = FirebaseDatabase.getInstance().getReference().child("Likes");
+        /*
         userUID = mAuth.getCurrentUser().getUid();
+        likedReference = FirebaseDatabase.getInstance().getReference().child("Likes");
+        */
+        artikelReference = FirebaseDatabase.getInstance().getReference().child("Artikel");
+
+        //sortArtikel = likedReference.child(userUID);
 
         listArtLiked = findViewById(R.id.likedArt);
         listArtLiked.setLayoutManager(new LinearLayoutManager(this));
 
         displayArtikel();
-
-        /* Liked Post
-        mAuth = FirebaseAuth.getInstance();
-        userUID = mAuth.getCurrentUser().getUid();
-        likedReference = FirebaseDatabase.getInstance().getReference().child("Likes");
-
-        likedReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String disukai = dataSnapshot.getValue(String.class);
-                    if(userUID.)
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        })
-        */
 
     }
 
@@ -75,7 +61,7 @@ public class LikedActivity extends AppCompatActivity {
                         ArtikelAdapter.class,
                         R.layout.cardview_likedart,
                         ViewHolderLiked.class,
-                        likedReference.orderByChild(userUID)
+                        artikelReference //.orderByChild(sortArtikel.toString())
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolderLiked viewHolder, ArtikelAdapter model, int position) {
